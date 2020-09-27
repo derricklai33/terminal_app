@@ -1,12 +1,15 @@
-# gem files
+# Gem files
 require 'tty-prompt'
 require 'colorize'
 require 'terminal-table'
+require 'httparty'
 
-#files
+# Files
+require 'json'
 require_relative 'menu'
 require_relative 'restaurant'
 require_relative 'app_constants'
+require_relative 'restaurantapi'
 
 start = Menu.new
 start.router

@@ -2,7 +2,6 @@ require 'httparty'
 require 'json'
 
 class CallApi
-
   attr_reader :restaurants
 
   def initialize
@@ -20,14 +19,14 @@ class CallApi
     example = JSON.parse(response.body)
 
     hash = {}
-    hash = example["restaurants"]
+    hash = example['restaurants']
 
     hash.map do |value|
       Restaurant.new(
-        value["restaurant"]["name"],
-        value["restaurant"]["average_cost_for_two"],
-        value["restaurant"]["cuisines"],
-        value["restaurant"]["location"]['address']
+        value['restaurant']['name'],
+        value['restaurant']['average_cost_for_two'],
+        value['restaurant']['cuisines'],
+        value['restaurant']['location']['address']
       )
     end
   end
