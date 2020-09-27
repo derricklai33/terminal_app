@@ -8,3 +8,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem 'colorize', '~> 0.8.1'
 gem 'terminal-table', '~> 1.8'
 gem 'tty-prompt', '~> 0.22.0'
+gem 'httparty', '~> 0.13.7'
+gem 'rubocop', '~> 0.92.0'
