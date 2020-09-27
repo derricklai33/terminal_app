@@ -19,13 +19,12 @@ class Menu
   end
 
   def terminal_table
-    rows = @restaurant_api.restaurants.map do |value|
-      value.to_a
-    end
+    rows = @restaurant_api.restaurants.map(&:to_a)
 
-    table = Terminal::Table.new({headings: HEADINGS, rows: rows} )
+    table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
   end
+
   def router
     loop do
       case display_menu
