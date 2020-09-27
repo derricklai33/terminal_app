@@ -18,16 +18,19 @@ class Menu
     end
   end
 
+  def terminal_table
+    rows = @restaurant_api.restaurants.map do |value|
+      value.to_a
+    end
+
+    table = Terminal::Table.new({headings: HEADINGS, rows: rows} )
+    puts table
+  end
   def router
     loop do
       case display_menu
       when '1'
-        @restaurant_api.restaurants.each do |value|
-          puts value.name
-          puts value.price
-          puts value.type_of_cuisine
-          puts value.location
-        end
+        terminal_table
       when '2'
         puts 'Hi'
       when '3'
