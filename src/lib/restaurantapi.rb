@@ -6,7 +6,8 @@ class CallApi
   end
 
   def read_api
-    url = 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&count=2'
+    url = 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&count=100&sort=cost&order=asc
+    '
     headers = {
       'user-key': '12cdc130154a9ed0c6004a4e01680fd4',
       'content-type': 'application/json'
@@ -18,9 +19,11 @@ class CallApi
   end
 
   def output_restaurant
+    count = 0
     hash = read_api
     hash.map do |value|
       Restaurant.new(
+        count += 1,
         value['restaurant']['name'],
         value['restaurant']['average_cost_for_two'],
         value['restaurant']['cuisines'],

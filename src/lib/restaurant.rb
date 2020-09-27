@@ -1,7 +1,8 @@
 class Restaurant
-  attr_reader :name, :price, :type_of_cuisine, :address
+  attr_reader :id, :name, :price, :type_of_cuisine, :address
 
-  def initialize(name, price, type_of_cuisine, address)
+  def initialize(id, name, price, type_of_cuisine, address)
+    @id = id
     @name = name
     @price = price
     @type_of_cuisine = type_of_cuisine
@@ -9,6 +10,6 @@ class Restaurant
   end
 
   def to_a
-    [@name, @price, @type_of_cuisine, @address]
+    [@id, @name, @price, @type_of_cuisine, @address]
   end
 end

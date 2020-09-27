@@ -13,16 +13,21 @@ class Menu
   def display_menu
     PROMPT.select('Welcome!') do |menu|
       menu.choice({ name: 'View all restaurants', value: '1' })
-      menu.choice({ name: 'Input new restaurants', value: '2' })
+      menu.choice({ name: 'Pick a random restaurant!', value: '2' })
       menu.choice({ name: 'Exit', value: '3' })
     end
   end
 
+  # Terminal table display method
   def terminal_table
     rows = @restaurant_api.restaurants.map(&:to_a)
 
     table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
+  end
+
+  def random_restaurant
+    puts 'Your random choice of restaurant today is: '
   end
 
   def router
@@ -31,7 +36,7 @@ class Menu
       when '1'
         terminal_table
       when '2'
-        puts 'Hi'
+        random_restaurant
       when '3'
         exit
       end
