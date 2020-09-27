@@ -1,11 +1,8 @@
-require 'httparty'
-require 'json'
-
 class CallApi
   attr_reader :restaurants
 
   def initialize
-    @restaurants = read_api
+    @restaurants = output_restaurant
   end
 
   def read_api
@@ -17,10 +14,11 @@ class CallApi
 
     response = HTTParty.get(url, headers: headers)
     example = JSON.parse(response.body)
+    example['restaurants']
+  end
 
-    hash = {}
-    hash = example['restaurants']
-
+  def output_restaurant
+    hash = read_api
     hash.map do |value|
       Restaurant.new(
         value['restaurant']['name'],
