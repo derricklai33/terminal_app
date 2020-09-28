@@ -1,6 +1,7 @@
 require_relative 'restaurantapi'
 require_relative 'restaurant'
 
+# RandomChoice class is used to return a random choice from array
 class RandomChoice
   attr_reader :random
 

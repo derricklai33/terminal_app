@@ -11,5 +11,6 @@ require_relative 'restaurant'
 require_relative 'app_constants'
 require_relative 'restaurantapi'
 
+# To start the application
 start = Menu.new
 start.router

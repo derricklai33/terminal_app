@@ -1,3 +1,4 @@
+# Class to use read HTTP request from Zomato API
 class CallApi
   attr_reader :restaurants
 
@@ -5,6 +6,7 @@ class CallApi
     @restaurants = output_restaurant
   end
 
+  # API key required from Zomato and parse through HTTParty to generate hash of list of restaurants
   def read_api
     url = 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&count=100&sort=cost&order=asc
     '
@@ -18,6 +20,7 @@ class CallApi
     example['restaurants']
   end
 
+  # Picking out required information from generated hash using HTTParty
   def output_restaurant
     count = 0
     hash = read_api

@@ -1,6 +1,7 @@
 class Restaurant
   attr_reader :id, :name, :price, :type_of_cuisine, :address
 
+  # Class to initialize restaurant object
   def initialize(id, name, price, type_of_cuisine, address)
     @id = id
     @name = name
