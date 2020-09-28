@@ -1,5 +1,6 @@
 require_relative 'app_constants'
 require_relative 'random_choice'
+require 'byebug'
 
 # Menu Class
 class Menu

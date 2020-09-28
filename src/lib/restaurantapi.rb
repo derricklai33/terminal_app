@@ -6,31 +6,34 @@ class CallApi
     @restaurants = output_restaurant
   end
 
-  # API key required from Zomato and parse through HTTParty to generate hash of list of restaurants
   def read_api
-    url = 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&count=100&sort=cost&order=asc
-    '
+    url = ['https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=0&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=20&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=40&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=60&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=80&count=100&sort=cost&order=desc']
     headers = {
       'user-key': '12cdc130154a9ed0c6004a4e01680fd4',
       'content-type': 'application/json'
     }
 
-    response = HTTParty.get(url, headers: headers)
-    example = JSON.parse(response.body)
-    example['restaurants']
+    response = []
+    url.each do |value|
+      restaurants = JSON.parse(HTTParty.get(value, headers: headers).response.body)['restaurants']
+      restaurants.each do |restaurant|
+        response << restaurant['restaurant']
+      end
+    end
+    response
   end
 
   # Picking out required information from generated hash using HTTParty
   def output_restaurant
     count = 0
-    hash = read_api
-    hash.map do |value|
+    arr = read_api
+    arr.map do |value|
       Restaurant.new(
         count += 1,
-        value['restaurant']['name'],
-        value['restaurant']['average_cost_for_two'],
-        value['restaurant']['cuisines'],
-        value['restaurant']['location']['address']
+        value['name'],
+        value['average_cost_for_two'],
+        value['cuisines'],
+        value['location']['address']
       )
     end
   end
