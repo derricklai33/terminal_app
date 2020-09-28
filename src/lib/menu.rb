@@ -1,4 +1,5 @@
 require_relative 'app_constants'
+require_relative 'random_choice'
 
 # Menu Class
 class Menu
@@ -27,7 +28,14 @@ class Menu
   end
 
   def random_restaurant
-    puts 'Your random choice of restaurant today is: '
+    generate_random = RandomChoice.new
+    puts "Your random choice of restaurant today is: #{generate_random.random[1]}"
+    puts 'Details:'
+    i = 2
+    while i < generate_random.random.length
+      puts "#{HEADINGS[i]}: #{generate_random.random[i]}"
+      i += 1
+    end
   end
 
   def router

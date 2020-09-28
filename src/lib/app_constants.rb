@@ -1,4 +1,4 @@
 module AppConstants
   PROMPT = TTY::Prompt.new
-  HEADINGS = ['id', 'name', 'price for 2', 'type_of_cuisine', 'address'].freeze
+  HEADINGS = ['ID', 'Name', 'Price for 2', 'Type of cuisine', 'Address'].freeze
 end
