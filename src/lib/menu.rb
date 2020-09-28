@@ -27,6 +27,7 @@ class Menu
     puts table
   end
 
+  # Generate random restaurant option
   def random_restaurant
     generate_random = RandomChoice.new
     puts "Your random choice of restaurant today is: #{generate_random.random[1]}"
@@ -38,6 +39,7 @@ class Menu
     end
   end
 
+  # Menu loop
   def router
     loop do
       case display_menu
