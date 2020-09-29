@@ -1,3 +1,5 @@
+require 'byebug'
+
 # Class to use read HTTP request from Zomato API
 class CallApi
   attr_reader :restaurants
@@ -6,6 +8,7 @@ class CallApi
     @restaurants = output_restaurant
   end
 
+  # Multiple API HTTP requests done using HTTParty
   def read_api
     url = ['https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=0&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=20&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=40&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=60&count=100&sort=cost&order=desc', 'https://developers.zomato.com/api/v2.1/search?entity_id=259&entity_type=city&start=80&count=100&sort=cost&order=desc']
     headers = {
@@ -37,4 +40,13 @@ class CallApi
       )
     end
   end
+
+  def generate_random
+    rand = @restaurants
+    new_arr = rand.map do |value|
+      value.to_a
+    end
+    new_arr.sample
+  end
+
 end

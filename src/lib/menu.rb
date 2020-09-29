@@ -1,5 +1,4 @@
 require_relative 'app_constants'
-require_relative 'random_choice'
 require 'byebug'
 
 # Menu Class
@@ -30,12 +29,12 @@ class Menu
 
   # Generate random restaurant option
   def random_restaurant
-    generate_random = RandomChoice.new
-    puts "Your random choice of restaurant today is: #{generate_random.random[1]}"
+    rand_res = @restaurant_api.generate_random
+    puts "Your random choice of restaurant today is: #{rand_res[1]}"
     puts 'Details:'
     i = 2
-    while i < generate_random.random.length
-      puts "#{HEADINGS[i]}: #{generate_random.random[i]}"
+    while i < rand_res.length
+      puts "#{HEADINGS[i]}: #{rand_res[i]}"
       i += 1
     end
   end
