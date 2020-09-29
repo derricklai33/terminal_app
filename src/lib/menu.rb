@@ -1,16 +1,18 @@
-require_relative 'app_constants'
-require 'byebug'
+# require_relative 'app_constants'
 
 # Menu Class
 class Menu
+  attr_accessor :choice
+
   include AppConstants
 
   # Initialized instance variable as an instance of CallApi class
   def initialize
     @restaurant_api = CallApi.new
+    @choice = choice
   end
 
-  # TTY prompt for user to select input
+  # TTY prompt for user to menu select input
   def display_menu
     PROMPT.select('Welcome!') do |menu|
       menu.choice({ name: 'View all restaurants', value: '1' })
@@ -19,15 +21,50 @@ class Menu
     end
   end
 
-  # Terminal table display method
-  def terminal_table
+  # TTY prompt for user to sort according to price, rating and cuisine type
+  def sorting_choice
+    @choice = PROMPT.select('Do you wish to sort?') do |menu|
+      menu.choice({ name: 'Sort according to price', value: '1' })
+      menu.choice({ name: 'Sort according to rating', value: '2' })
+      menu.choice({ name: 'Sort according to type of cuisine', value: '3' })
+      menu.choice({ name: 'Back to main menu', value: '4' })
+    end
+  end
+
+  # Loop for sorting menu
+  def sorting_menu
+    sort = SortingRestaurant.new
+    loop do
+      case sorting_choice
+      when '1'
+        @choice = sort.sorting_price
+      when '2'
+        @choice = sort.sorting_rating
+      when '3'
+        @choice = sort.sorting_cuisine
+      when '4'
+        router
+      end
+      terminal_table_sorted(@choice)
+    end
+  end
+
+  # Terminal table display method (Sorted Menu)
+  def terminal_table_sorted(arr)
+    rows = arr
+    table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
+    puts table
+  end
+
+  # Terminal table display method (Menu)
+  def terminal_table_menu
     rows = @restaurant_api.restaurants.map(&:to_a)
 
     table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
   end
 
-  # Generate random restaurant option
+  # Generate random restaurant prompt
   def random_restaurant
     rand_res = @restaurant_api.generate_random
     puts "Your random choice of restaurant today is: #{rand_res[1]}"
@@ -44,7 +81,8 @@ class Menu
     loop do
       case display_menu
       when '1'
-        terminal_table
+        terminal_table_menu
+        sorting_menu
       when '2'
         random_restaurant
       when '3'
