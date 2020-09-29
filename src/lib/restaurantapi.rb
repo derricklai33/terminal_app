@@ -30,13 +30,15 @@ class CallApi
   def output_restaurant
     count = 0
     arr = read_api
+    byebug
     arr.map do |value|
       Restaurant.new(
         count += 1,
         value['name'],
         value['average_cost_for_two'],
         value['cuisines'],
-        value['location']['address']
+        value['location']['address'],
+        value['user_rating']['aggregate_rating']
       )
     end
   end
