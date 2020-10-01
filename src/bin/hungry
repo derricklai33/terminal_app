@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+# Gem files
+require 'tty-prompt'
+require 'colorize'
+require 'terminal-table'
+require 'httparty'
+
+# Files
+require 'json'
+require_relative '../lib/app_constants'
+require_relative '../lib/menu'
+require_relative '../lib/restaurant'
+require_relative '../lib/restaurantapi'
+require_relative '../lib/sorting'
+
+# To start the application
+start = Menu.new
+start.router
