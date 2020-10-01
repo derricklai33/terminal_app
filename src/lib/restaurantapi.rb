@@ -4,15 +4,15 @@ require_relative 'app_constants'
 
 # Class to use read HTTP request from Zomato API
 class CallApi
-  attr_reader :restaurants, :user_restaurants
-  attr_accessor :counter
+  attr_reader :restaurants
+  attr_accessor :counter, :user_restaurants
 
   include AppConstants
 
   def initialize
-    @restaurants = read_saved_restaurants
+    @restaurants = output_restaurant
     @user_restaurants = []
-    @counter = 1
+    @counter = 0
   end
 
   # Multiple API HTTP requests done using HTTParty
@@ -35,11 +35,11 @@ class CallApi
 
   # Picking out required information from generated hash using HTTParty
   def api_restaurant
-    count = 0
+    counter = read_saved_restaurants.length
     arr = read_api
     arr.map do |value|
       Restaurant.new(
-        count += 1,
+        counter += 1,
         value['name'],
         value['average_cost_for_two'],
         value['cuisines'],
@@ -49,10 +49,12 @@ class CallApi
     end
   end
 
+  # Generates user input to create a new Restaurant object
   def generate_restaurants
+    @user_restaurants = read_saved_restaurants
     new_restaurants = Restaurant.restaurant_input
     @user_restaurants << Restaurant.new(
-      new_restaurants['id'] = @counter,
+      new_restaurants['id'] = @user_restaurants.length + 1,
       new_restaurants['name'],
       new_restaurants['price'],
       new_restaurants['cuisine'],
@@ -60,9 +62,9 @@ class CallApi
       new_restaurants['rating']
     )
     @counter += 1
-    @user_restaurants
   end
 
+  # Writes to JSON of newly created Restaurant object, storing in hash format
   def save_restaurants
     data = @user_restaurants
     ret = data.map do |value|
@@ -78,6 +80,7 @@ class CallApi
     File.write("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json", JSON.pretty_generate(ret))
   end
 
+  # Reading from JSON file and converting to array
   def read_saved_restaurants
     data = File.read("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json")
     JSON.parse(data).map do |value|
@@ -90,6 +93,12 @@ class CallApi
         value['rating']
       )
     end
+  end
+
+  # Ouput to Terminal Table
+  def output_restaurant
+    ret = read_saved_restaurants
+    (ret << api_restaurant).flatten
   end
 
   # Generate a random restaurant array containing name, price for 2, cuisine, location and rating
