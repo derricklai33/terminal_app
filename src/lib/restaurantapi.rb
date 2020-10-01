@@ -1,9 +1,18 @@
+require 'byebug'
+require 'json'
+require_relative 'app_constants'
+
 # Class to use read HTTP request from Zomato API
 class CallApi
-  attr_reader :restaurants
+  attr_reader :restaurants, :user_restaurants
+  attr_accessor :counter
+
+  include AppConstants
 
   def initialize
-    @restaurants = output_restaurant
+    @restaurants = read_saved_restaurants
+    @user_restaurants = []
+    @counter = 1
   end
 
   # Multiple API HTTP requests done using HTTParty
@@ -25,7 +34,7 @@ class CallApi
   end
 
   # Picking out required information from generated hash using HTTParty
-  def output_restaurant
+  def api_restaurant
     count = 0
     arr = read_api
     arr.map do |value|
@@ -36,6 +45,49 @@ class CallApi
         value['cuisines'],
         value['location']['address'],
         value['user_rating']['aggregate_rating']
+      )
+    end
+  end
+
+  def generate_restaurants
+    new_restaurants = Restaurant.restaurant_input
+    @user_restaurants << Restaurant.new(
+      new_restaurants['id'] = @counter,
+      new_restaurants['name'],
+      new_restaurants['price'],
+      new_restaurants['cuisine'],
+      new_restaurants['location'],
+      new_restaurants['rating']
+    )
+    @counter += 1
+    @user_restaurants
+  end
+
+  def save_restaurants
+    data = @user_restaurants
+    ret = data.map do |value|
+      {
+        id: value.id,
+        name: value.name,
+        price: value.price,
+        cuisine: value.type_of_cuisine,
+        address: value.address,
+        rating: value.rating
+      }
+    end
+    File.write("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json", JSON.pretty_generate(ret))
+  end
+
+  def read_saved_restaurants
+    data = File.read("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json")
+    JSON.parse(data).map do |value|
+      Restaurant.new(
+        value['id'],
+        value['name'],
+        value['price'],
+        value['cuisine'],
+        value['address'],
+        value['rating']
       )
     end
   end
