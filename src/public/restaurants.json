@@ -6,5 +6,13 @@
     "cuisine": "Asian, Japanese",
     "address": "Melbourne CBD",
     "rating": 4.6
+  },
+  {
+    "id": 2,
+    "name": "Hungry Jacks",
+    "price": 20,
+    "cuisine": "Fast Food",
+    "address": "Anywhere",
+    "rating": 5.0
   }
 ]

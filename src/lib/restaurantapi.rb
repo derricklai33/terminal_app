@@ -77,12 +77,12 @@ class CallApi
         rating: value.rating
       }
     end
-    File.write("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json", JSON.pretty_generate(ret))
+    File.write("#{File.dirname(__FILE__)}/../public/restaurants.json", JSON.pretty_generate(ret))
   end
 
   # Reading from JSON file and converting to array
   def read_saved_restaurants
-    data = File.read("#{Dir.home}/Desktop/terminal_app/src/public/restaurants.json")
+    data = File.read("#{File.dirname(__FILE__)}/../public/restaurants.json")
     JSON.parse(data).map do |value|
       Restaurant.new(
         value['id'],
