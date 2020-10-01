@@ -1,4 +1,6 @@
 # require_relative 'app_constants'
+require_relative 'restaurantapi'
+require 'byebug'
 
 # Menu Class
 class Menu
@@ -14,10 +16,11 @@ class Menu
 
   # TTY prompt for user to menu select input
   def display_menu
-    PROMPT.select('Welcome!') do |menu|
+    PROMPT.select('Welcome to my Where do we eat? App!') do |menu|
       menu.choice({ name: 'View all restaurants', value: '1' })
       menu.choice({ name: 'Pick a random restaurant!', value: '2' })
-      menu.choice({ name: 'Exit', value: '3' })
+      menu.choice({ name: 'Input new restaurants', value: '3' })
+      menu.choice({ name: 'Exit', value: '4' })
     end
   end
 
@@ -31,24 +34,6 @@ class Menu
     end
   end
 
-  # Loop for sorting menu
-  def sorting_menu
-    sort = SortingRestaurant.new
-    loop do
-      case sorting_choice
-      when '1'
-        @choice = sort.sorting_price
-      when '2'
-        @choice = sort.sorting_rating
-      when '3'
-        @choice = sort.sorting_cuisine
-      when '4'
-        router
-      end
-      terminal_table_sorted(@choice)
-    end
-  end
-
   # Terminal table display method (Sorted Menu)
   def terminal_table_sorted(arr)
     rows = arr
@@ -58,8 +43,7 @@ class Menu
 
   # Terminal table display method (Menu)
   def terminal_table_menu
-    rows = @restaurant_api.restaurants.map(&:to_a)
-
+    rows = @restaurant_api.output_restaurant.map(&:to_a)
     table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
   end
@@ -85,9 +69,31 @@ class Menu
         sorting_menu
       when '2'
         random_restaurant
+      # Generate input and saves it to JSON file to 'append' to JSON file
       when '3'
+        @restaurant_api.generate_restaurants
+        @restaurant_api.save_restaurants
+      when '4'
         exit
       end
     end
+  end
+end
+
+# Loop for sorting menu
+def sorting_menu
+  sort = SortingRestaurant.new
+  loop do
+    case sorting_choice
+    when '1'
+      @choice = sort.sorting_price
+    when '2'
+      @choice = sort.sorting_rating
+    when '3'
+      @choice = sort.sorting_cuisine
+    when '4'
+      router
+    end
+    terminal_table_sorted(@choice)
   end
 end
