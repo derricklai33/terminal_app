@@ -57,5 +57,4 @@ RSpec.describe 'Restaurant class test' do
     # Assert
     expect(test_rating).to eq(4.5)
   end
-    
 end

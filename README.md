@@ -11,11 +11,13 @@
 ```bash
 git clone https://github.com/derricklai33/terminal_app.git ~/terminal_app
 ```
+
 4. Run `setup` executable file
 
 ```bash
 ~/terminal_app/src/bin/setup
 ```
+
 5. Open bash profile
 
 ```bash
@@ -27,6 +29,7 @@ open ~/.bash_profile
 # For Linux users:
 ~/.profile
 ```
+
 6. Add the following line
 
 ```bash
