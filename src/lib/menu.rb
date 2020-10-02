@@ -16,7 +16,7 @@ class Menu
 
   # TTY prompt for user to menu select input
   def display_menu
-    PROMPT.select('Welcome to my Where do we eat? App!'.colorize(:green)) do |menu|
+    PROMPT.select('Welcome to my What are we having tonight? app!'.colorize(:green)) do |menu|
       menu.choice({ name: 'View all restaurants', value: '1' })
       menu.choice({ name: 'Pick a random restaurant!', value: '2' })
       menu.choice({ name: 'Input new restaurants', value: '3' })
@@ -52,11 +52,11 @@ class Menu
   # Generate random restaurant prompt
   def random_restaurant
     rand_res = @restaurant_api.generate_random
-    puts "Your random choice of restaurant today is: #{rand_res[1]}"
-    puts 'Details:'
+    puts "Your random choice of restaurant today is: ".colorize(:green) + "#{rand_res[1]}"
+    puts 'Details:'.colorize(:green)
     i = 2
     while i < rand_res.length
-      puts "#{HEADINGS[i]}: #{rand_res[i]}"
+      puts "#{HEADINGS[i]}: ".colorize(:green) + "#{rand_res[i]}"
       i += 1
     end
   end
