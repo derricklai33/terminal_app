@@ -25,11 +25,11 @@ class Restaurant
   def self.restaurant_input
     restaurants = {}
     INPUTS.each do |prompt|
-      puts "Input the #{prompt}?"
-      puts 'Enter range from 0.0 to 5.0' if prompt == 'rating'
-      puts 'Example: 2 Elizabeth Street, Melbourne' if prompt == 'location'
-      puts 'Example: Asian, Japanese' if prompt == 'cuisine'
-      print '> '
+      puts "Input the #{prompt}?".colorize(:green)
+      puts 'Enter range from 0.0 to 5.0'.colorize(:green) if prompt == 'rating'
+      puts 'Example: 2 Elizabeth Street, Melbourne'.colorize(:green) if prompt == 'location'
+      puts 'Example: Asian, Japanese'.colorize(:green) if prompt == 'cuisine'
+      print '> '.colorize(:green)
       restaurants[prompt] = gets.chomp
     end
     restaurants
