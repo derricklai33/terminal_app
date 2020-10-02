@@ -82,16 +82,20 @@ class CallApi
 
   # Reading from JSON file and converting to array
   def read_saved_restaurants
-    data = File.read("#{File.dirname(__FILE__)}/../public/restaurants.json")
-    JSON.parse(data).map do |value|
-      Restaurant.new(
-        value['id'],
-        value['name'],
-        value['price'],
-        value['cuisine'],
-        value['address'],
-        value['rating']
-      )
+    if File.exist?("#{File.dirname(__FILE__)}/../public/restaurants.json")
+      data = File.read("#{File.dirname(__FILE__)}/../public/restaurants.json")
+      JSON.parse(data).map do |value|
+        Restaurant.new(
+          value['id'],
+          value['name'],
+          value['price'],
+          value['cuisine'],
+          value['address'],
+          value['rating']
+        )
+      end
+    else
+      return []
     end
   end
 
@@ -108,3 +112,4 @@ class CallApi
     new_arr.sample
   end
 end
+
