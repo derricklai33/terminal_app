@@ -18,24 +18,24 @@ git clone https://github.com/derricklai33/terminal_app.git ~/terminal_app
 ```
 5. Open bash profile
 
-For MAC users:
 ```bash
+# For MAC users:
 open ~/.bash_profile
 ```
 
-For Linux users:
 ```bash
+# For Linux users:
 ~/.profile
 ```
 6. Add the following line
 
-For MAC users:
 ```bash
+# For MAC users:
 export PATH=$PATH:$HOME/terminal_app/src/bin
 ```
 
-For Linux users:
 ```bash
+# For Linux users:
 PATH=$PATH:$HOME/terminal_app/src/bin
 ```
 
