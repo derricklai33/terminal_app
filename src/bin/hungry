@@ -9,11 +9,11 @@ require 'httparty'
 # Files
 require 'optparse'
 require 'json'
-require_relative 'app_constants'
-require_relative 'menu'
-require_relative 'restaurant'
-require_relative 'restaurantapi'
-require_relative 'sorting'
+require_relative '../lib/app_constants'
+require_relative '../lib/menu'
+require_relative '../lib/restaurant'
+require_relative '../lib/restaurantapi'
+require_relative '../lib/sorting'
 
 parser = OptionParser.new do |option|
 
