@@ -16,7 +16,7 @@ class Menu
 
   # TTY prompt for user to menu select input
   def display_menu
-    PROMPT.select('Welcome to my Where do we eat? App!') do |menu|
+    PROMPT.select('Welcome to my Where do we eat? App!'.colorize(:green)) do |menu|
       menu.choice({ name: 'View all restaurants', value: '1' })
       menu.choice({ name: 'Pick a random restaurant!', value: '2' })
       menu.choice({ name: 'Input new restaurants', value: '3' })
@@ -26,7 +26,7 @@ class Menu
 
   # TTY prompt for user to sort according to price, rating and cuisine type
   def sorting_choice
-    @choice = PROMPT.select('Do you wish to sort?') do |menu|
+    @choice = PROMPT.select('Do you wish to sort?'.colorize(:green)) do |menu|
       menu.choice({ name: 'Sort according to price', value: '1' })
       menu.choice({ name: 'Sort according to rating', value: '2' })
       menu.choice({ name: 'Sort according to type of cuisine', value: '3' })
@@ -43,6 +43,7 @@ class Menu
 
   # Terminal table display method (Menu)
   def terminal_table_menu
+    system("clear")
     rows = @restaurant_api.output_restaurant.map(&:to_a)
     table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
