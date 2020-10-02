@@ -84,7 +84,7 @@ class CallApi
   def read_saved_restaurants
     if File.exist?("#{File.dirname(__FILE__)}/../public/restaurants.json")
       data = File.read("#{File.dirname(__FILE__)}/../public/restaurants.json")
-      JSON.parse(data).map do |value|
+      ret = JSON.parse(data).map do |value|
         Restaurant.new(
           value['id'],
           value['name'],
@@ -94,8 +94,12 @@ class CallApi
           value['rating']
         )
       end
+      # Deletes output of empty hashes from JSON
+      ret.each do |value|
+        ret.delete(value) if value.name.nil?
+      end
     else
-      return []
+      []
     end
   end
 
@@ -112,4 +116,3 @@ class CallApi
     new_arr.sample
   end
 end
-
