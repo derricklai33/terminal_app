@@ -1,6 +1,10 @@
+require_relative 'app_constants'
+
 # Class to initialize restaurant object
 class Restaurant
   attr_reader :id, :name, :price, :type_of_cuisine, :address, :rating
+
+  include AppConstants
 
   # Instance attributes for initialization. (More variables can be added given they are available from API)
   def initialize(id, name, price, type_of_cuisine, address, rating)
@@ -19,10 +23,12 @@ class Restaurant
   end
 
   def self.restaurant_input
-    inputs = %w[name price cuisine location rating]
     restaurants = {}
-    inputs.each do |prompt|
+    INPUTS.each do |prompt|
       puts "Input the #{prompt}?"
+      puts 'Enter range from 0.0 to 5.0' if prompt == 'rating'
+      puts 'Example: 2 Elizabeth Street, Melbourne' if prompt == 'location'
+      puts 'Example: Asian, Japanese' if prompt == 'cuisine'
       print '> '
       restaurants[prompt] = gets.chomp
     end
