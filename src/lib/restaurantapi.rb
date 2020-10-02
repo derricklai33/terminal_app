@@ -77,6 +77,13 @@ class CallApi
         rating: value.rating
       }
     end
+    # Will not store or save user input if it's invalid
+    ret.each do |value|
+      if value[:name].nil? || value[:name] == '' || (value[:price]).zero? || value[:cuisine].nil? || value[:cuisine] == '' || value[:address].nil? || value[:address] == '' || value[:rating].nil?
+        ret.delete(value)
+      end
+    end
+
     File.write("#{File.dirname(__FILE__)}/../public/restaurants.json", JSON.pretty_generate(ret))
   end
 
@@ -94,9 +101,11 @@ class CallApi
           value['rating']
         )
       end
-      # Deletes output of empty hashes from JSON
+      # Deletes output of empty hashes from JSON (except rating, as it can be 0.0)
       ret.each do |value|
-        ret.delete(value) if value.name.nil?
+        if value.name.nil? || value.name == '' || value.price.zero? || value.type_of_cuisine.nil? || value.type_of_cuisine == '' || value.address.nil? || value.address == '' || value.rating.nil?
+          ret.delete(value)
+        end
       end
     else
       []
