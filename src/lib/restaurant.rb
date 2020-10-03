@@ -22,9 +22,11 @@ class Restaurant
     [@id, @name, @price, @type_of_cuisine, @address, @rating]
   end
 
+  # Generate user input and prompts user for input
   def self.restaurant_input
     restaurants = {}
     INPUTS.each do |prompt|
+      puts 'Inputs that are empty or invalid will be deleted automatically. Please input correct information only!'.colorize(:red)
       puts "Input the #{prompt}?".colorize(:green)
       puts 'Enter range from 0.0 to 5.0'.colorize(:green) if prompt == 'rating'
       puts 'Example: 2 Elizabeth Street, Melbourne'.colorize(:green) if prompt == 'location'
