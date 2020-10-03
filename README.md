@@ -1,5 +1,9 @@
 # Terminal App Assignment
 
+## GitHub Repository
+
+[Derrick Lai terminal app](https://github.com/derricklai33/terminal_app)
+
 ## Installation and Setup
 
 **Application is suitable for MAC and Linux users only**
