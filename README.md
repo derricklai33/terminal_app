@@ -136,3 +136,9 @@ After cd-ing into `~/terminal_app/src`, run the following command to perform tes
 rspec -fd
 ```
 The command will show the title of test and whether if they pass or fail.
+
+## References
+
+[Zomato API](https://developers.zomato.com/api)
+
+[Flowchart - Drawio](draw.io)
