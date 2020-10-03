@@ -13,6 +13,7 @@ require_relative 'restaurant'
 require_relative 'restaurantapi'
 require_relative 'sorting'
 
+# Option parser
 parser = OptionParser.new do |option|
   include AppConstants
 
@@ -28,6 +29,7 @@ parser = OptionParser.new do |option|
   end
 
   option.on('-r', '--random', 'Display a random restaurant') do
+    system('clear')
     puts 'Generating a random restaurant.......'.colorize(:green)
     opt = Menu.new
     dis = opt.random_restaurant
@@ -37,6 +39,7 @@ end
 
 parser.parse!
 
+system('clear')
 puts ' '
 puts '░█████╗░██████╗░███████╗  ██╗░░░██╗░█████╗░██╗░░░██╗  ██╗░░██╗██╗░░░██╗███╗░░██╗░██████╗░██████╗░██╗░░░██╗░█████╗░'.colorize(:red)
 puts '██╔══██╗██╔══██╗██╔════╝  ╚██╗░██╔╝██╔══██╗██║░░░██║  ██║░░██║██║░░░██║████╗░██║██╔════╝░██╔══██╗╚██╗░██╔╝██╔══██╗'.colorize(:red)

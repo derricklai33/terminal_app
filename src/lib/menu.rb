@@ -1,4 +1,3 @@
-# require_relative 'app_constants'
 require_relative 'restaurantapi'
 require 'byebug'
 
@@ -44,6 +43,7 @@ class Menu
   # Terminal table display method (Menu)
   def terminal_table_menu
     system('clear')
+    puts 'Generating restaurants.....'.colorize(:green)
     rows = @restaurant_api.output_restaurant.map(&:to_a)
     table = Terminal::Table.new({ headings: HEADINGS, rows: rows })
     puts table
@@ -51,6 +51,7 @@ class Menu
 
   # Generate random restaurant prompt
   def random_restaurant
+    system('clear')
     rand_res = @restaurant_api.generate_random
     puts 'Your random choice of restaurant today is: '.colorize(:green) + (rand_res[1]).to_s
     puts 'Details:'.colorize(:green)
@@ -59,6 +60,7 @@ class Menu
       puts "#{HEADINGS[i]}: ".colorize(:green) + (rand_res[i]).to_s
       i += 1
     end
+    puts ' '
   end
 
   # Menu loop
@@ -75,26 +77,28 @@ class Menu
         @restaurant_api.generate_restaurants
         @restaurant_api.save_restaurants
       when '4'
+        system('clear')
         exit
       end
     end
   end
-end
 
-# Loop for sorting menu
-def sorting_menu
-  sort = SortingRestaurant.new
-  loop do
-    case sorting_choice
-    when '1'
-      @choice = sort.sorting_price
-    when '2'
-      @choice = sort.sorting_rating
-    when '3'
-      @choice = sort.sorting_cuisine
-    when '4'
-      router
+  # Loop for sorting menu
+  def sorting_menu
+    sort = SortingRestaurant.new
+    loop do
+      case sorting_choice
+      when '1'
+        @choice = sort.sorting_price
+      when '2'
+        @choice = sort.sorting_rating
+      when '3'
+        @choice = sort.sorting_cuisine
+      when '4'
+        router
+        system('clear')
+      end
+      terminal_table_sorted(@choice)
     end
-    terminal_table_sorted(@choice)
   end
 end
