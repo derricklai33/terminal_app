@@ -14,10 +14,9 @@ require_relative 'restaurantapi'
 require_relative 'sorting'
 
 parser = OptionParser.new do |option|
-
   include AppConstants
-  
-  option.banner = "Welcome to What are we having tonight? app!"
+
+  option.banner = 'Welcome to What are we having tonight? app!'
   option.on('-v', '--version', 'Displays the version') do
     puts "You are on Version #{VERSION}"
     exit
@@ -29,7 +28,7 @@ parser = OptionParser.new do |option|
   end
 
   option.on('-r', '--random', 'Display a random restaurant') do
-    puts "Generating a random restaurant.......".colorize(:green)
+    puts 'Generating a random restaurant.......'.colorize(:green)
     opt = Menu.new
     dis = opt.random_restaurant
     exit
@@ -38,13 +37,13 @@ end
 
 parser.parse!
 
-puts " "
-puts "░█████╗░██████╗░███████╗  ██╗░░░██╗░█████╗░██╗░░░██╗  ██╗░░██╗██╗░░░██╗███╗░░██╗░██████╗░██████╗░██╗░░░██╗░█████╗░".colorize(:red)
-puts "██╔══██╗██╔══██╗██╔════╝  ╚██╗░██╔╝██╔══██╗██║░░░██║  ██║░░██║██║░░░██║████╗░██║██╔════╝░██╔══██╗╚██╗░██╔╝██╔══██╗".colorize(:red)
-puts "███████║██████╔╝█████╗░░  ░╚████╔╝░██║░░██║██║░░░██║  ███████║██║░░░██║██╔██╗██║██║░░██╗░██████╔╝░╚████╔╝░╚═╝███╔╝".colorize(:red)
-puts "██╔══██║██╔══██╗██╔══╝░░  ░░╚██╔╝░░██║░░██║██║░░░██║  ██╔══██║██║░░░██║██║╚████║██║░░╚██╗██╔══██╗░░╚██╔╝░░░░░╚══╝░".colorize(:red)
-puts "██║░░██║██║░░██║███████╗  ░░░██║░░░╚█████╔╝╚██████╔╝  ██║░░██║╚██████╔╝██║░╚███║╚██████╔╝██║░░██║░░░██║░░░░░░██╗░░".colorize(:red)
-puts "╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝  ░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░░░░╚═╝░░".colorize(:red)
+puts ' '
+puts '░█████╗░██████╗░███████╗  ██╗░░░██╗░█████╗░██╗░░░██╗  ██╗░░██╗██╗░░░██╗███╗░░██╗░██████╗░██████╗░██╗░░░██╗░█████╗░'.colorize(:red)
+puts '██╔══██╗██╔══██╗██╔════╝  ╚██╗░██╔╝██╔══██╗██║░░░██║  ██║░░██║██║░░░██║████╗░██║██╔════╝░██╔══██╗╚██╗░██╔╝██╔══██╗'.colorize(:red)
+puts '███████║██████╔╝█████╗░░  ░╚████╔╝░██║░░██║██║░░░██║  ███████║██║░░░██║██╔██╗██║██║░░██╗░██████╔╝░╚████╔╝░╚═╝███╔╝'.colorize(:red)
+puts '██╔══██║██╔══██╗██╔══╝░░  ░░╚██╔╝░░██║░░██║██║░░░██║  ██╔══██║██║░░░██║██║╚████║██║░░╚██╗██╔══██╗░░╚██╔╝░░░░░╚══╝░'.colorize(:red)
+puts '██║░░██║██║░░██║███████╗  ░░░██║░░░╚█████╔╝╚██████╔╝  ██║░░██║╚██████╔╝██║░╚███║╚██████╔╝██║░░██║░░░██║░░░░░░██╗░░'.colorize(:red)
+puts '╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝  ░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░░░░╚═╝░░'.colorize(:red)
 
 # To start the application
 start = Menu.new

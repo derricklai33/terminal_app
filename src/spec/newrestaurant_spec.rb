@@ -3,7 +3,7 @@ require 'tty-prompt'
 require_relative '../lib/restaurant'
 
 RSpec.describe 'Restaurant class ' do
-  it 'To generate new restaurant class ensuring it works' do 
+  it 'To generate new restaurant class ensuring it works' do
     # Arrange
     test_new_restaurant = Restaurant.new(
       '1',
@@ -20,7 +20,7 @@ RSpec.describe 'Restaurant class ' do
     test_cuisine = test_new_restaurant.type_of_cuisine
     test_address = test_new_restaurant.address
     test_rating = test_new_restaurant.rating
-    
+
     # Assert
     expect(test_id).to eq(1)
     expect(test_name).to eq('Test_restaurant')

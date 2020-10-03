@@ -14,5 +14,13 @@
     "cuisine": "Fast Food",
     "address": "Anywhere",
     "rating": 5.0
+  },
+  {
+    "id": 3,
+    "name": "Maccas",
+    "price": 20,
+    "cuisine": "Fastfood",
+    "address": "Everywhere",
+    "rating": 5.0
   }
 ]
